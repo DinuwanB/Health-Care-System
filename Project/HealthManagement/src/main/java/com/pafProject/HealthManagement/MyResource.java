@@ -1,4 +1,4 @@
-package com.paf.HealthCare;
+package com.pafProject.HealthManagement;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

@@ -3,14 +3,14 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.paf</groupId>
-    <artifactId>HealthCare</artifactId>
+    <groupId>com.pafProject</groupId>
+    <artifactId>HealthManagement</artifactId>
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
-    <name>HealthCare</name>
+    <name>HealthManagement</name>
 
     <build>
-        <finalName>HealthCare</finalName>
+        <finalName>HealthManagement</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
