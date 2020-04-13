@@ -8,30 +8,30 @@ public class CustomerDataModel {
 	
 	Connection con = null;
 	
-	public CustomerDataModel()
-	{
-		
-		String url = "jdbc:mysql://localhost:3306/paf-project";
+	public CustomerDataModel() {
+		String url ="jdbc:mysql://localhost:3306/paf-project?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 		String username = "root";
 		String password = "";
 		
 		try {
-			
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(url,username,password);
-			
+			System.out.println(" connected");
 		}
 		catch(Exception e) {
-			System.out.println(e);
+			System.out.println("not connected" + e);
 		}
-		
 	}
+	
+	
 
 	public List<Customer> getCustomers() {
 		List<Customer> cust = new ArrayList<Customer>();
+		
 		String sql = "SELECT * FROM customer";
 		
 		try {
+			
 			Statement st =  con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			while(rs.next()) {
@@ -50,14 +50,65 @@ public class CustomerDataModel {
 				
 			}
 		} catch (Exception e) {
-			
+			System.out.println("catch 1 "+e);
 		}
 		return cust;
 	}
 
-	public Customer getCustomer() {
-		// TODO Auto-generated method stub
-		return null;
+	public Customer getCustomer(String id) {
+		
+String sql = "SELECT * FROM customer WHERE NIC ="+ id;
+	Customer cu1 = new Customer();
+		try {
+			 
+			Statement st =  con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			if(rs.next()) {
+				
+				cu1.setFirstname(rs.getString(1));
+				cu1.setFirstname(rs.getString(2));
+				cu1.setLastname(rs.getString(3));
+				cu1.setEmail(rs.getString(4));
+				cu1.setPhoneNumber(rs.getInt(5));
+				cu1.setNIC(rs.getString(6));
+				cu1.setBirthday(rs.getString(7));  
+				cu1.setPassword(rs.getString(8));
+				
+				
+			}
+		} catch (Exception e) {
+			System.out.println("catch 2 "+e);
+		}
+		
+		return cu1;
+	}
+	
+	public void CreateCustomer(Customer c1) {
+		
+		
+	}
+
+	public void create(Customer c1) {
+		
+		String sql = "INSERT INTO customer values (?,?,?,?,?,?,?,?)";
+		try {
+			
+			PreparedStatement st =  con.prepareStatement(sql);
+			
+			st.setInt(1, c1.getCustomerId());
+			st.setString(2, c1.getFirstname());
+			st.setString(3, c1.getLastname());
+			st.setString(4, c1.getEmail());
+			st.setInt(5, c1.getPhoneNumber());
+			st.setString(6, c1.getNIC());
+			st.setString(7, c1.getBirthday());
+			st.setString(8, c1.getPassword());
+			
+			st.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("catch 3 "+e);
+		}
 	}
 
 }

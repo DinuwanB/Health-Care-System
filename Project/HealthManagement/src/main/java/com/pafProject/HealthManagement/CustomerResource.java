@@ -11,13 +11,13 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;;
 
-@Path("customer")
+@Path("Customer")
 public class CustomerResource {
 	
 	CustomerDataModel cusRepo =  new CustomerDataModel();
 	
 	@GET
-	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Produces(MediaType.APPLICATION_XML)
 	public List<Customer> getCustomers()
 	{
 		System.out.println("Employee Get API Called");
@@ -26,17 +26,22 @@ public class CustomerResource {
 	}
 	
 	@GET
-	@Path("customer/{id}")
-	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Path("Customer/{id}")
+	@Produces(MediaType.APPLICATION_XML)
 	public Customer getCustomer(@PathParam("id") String id) 
 	{
-		return cusRepo.getCustomer();
+		System.out.println("Employeess Get API Called");
+		return cusRepo.getCustomer(id);
 	}
 	
 	@POST
-	@Path("customer")
-	public Customer createCustomer()
+	@Path("Customer")
+	public Customer createCustomer(Customer c1)
 	{
+		System.out.println(c1);
+		cusRepo.create(c1);
+		
+		return c1;
 		
 	}
 	
