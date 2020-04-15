@@ -55,9 +55,9 @@ public class CustomerDataModel {
 		return cust;
 	}
 
-	public Customer getCustomer(String NIC) {
+	public Customer getCustomer(int id) {
 		
-		String sqlq = "SELECT * FROM customers WHERE c_id="+NIC;
+		String sqlq = "SELECT * FROM customers WHERE c_id="+id;
 		Customer cu1 = new Customer();
 		try {
 			Statement st =  con.createStatement();
@@ -131,6 +131,26 @@ public class CustomerDataModel {
 			System.out.println("catch 3 "+e);
 			
 		}
+		
+	}
+
+
+
+	public void delete(int id) {
+		String sql = "DELETE FROM customers WHERE c_id=?";
+		try {
+			
+			PreparedStatement st = con.prepareStatement(sql);
+			
+			st.setInt(1, id);
+			st.executeUpdate();
+			
+		} catch(Exception e) {
+			
+			System.out.println("catch 4 "+e);
+			
+		}
+		
 		
 	}
 
