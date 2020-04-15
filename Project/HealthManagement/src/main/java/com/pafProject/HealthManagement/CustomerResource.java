@@ -4,6 +4,8 @@ package com.pafProject.HealthManagement;
 
 import java.util.List;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -37,13 +39,14 @@ public class CustomerResource {
 	
 	@POST
 	@Path("Customer")
-	public Customer create(Customer c1)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public String createUser(@FormParam("nic") String nic, @FormParam("firstname") String firstname, @FormParam("lastname") String lastname,
+			@FormParam("email") String email, @FormParam("phonenumber") String phonenumber,@FormParam("Birthday") String birthday,
+			@FormParam("password") String password )
 	{
 		System.out.println("Employeess Create API Called");
-		System.out.println(c1);
-		cusRepo.create(c1);
-		
-		return c1;
+		String output = cusRepo.createUser(nic,firstname,lastname,email,phonenumber,birthday,password);
+		return output; 
 		
 	}
 	

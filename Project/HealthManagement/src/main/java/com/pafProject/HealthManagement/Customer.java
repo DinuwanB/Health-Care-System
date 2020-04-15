@@ -50,8 +50,7 @@ public class Customer {
 	}
 	public void setPhoneNumber(int phoneNumber) {
 		this.phoneNumber = phoneNumber;
-	}
-	
+	}	
 	public String getBirthday() {
 		return birthday;
 	}
@@ -64,8 +63,4 @@ public class Customer {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
-	
-
 }
