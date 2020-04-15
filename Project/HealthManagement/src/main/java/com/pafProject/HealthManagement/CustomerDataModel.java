@@ -108,6 +108,31 @@ public class CustomerDataModel {
 		}
 		
 	}
+	
+	public void updateUser(Customer cus1) {
+		String sql = "UPDATE customers set c_nic=? , FirstName=?, LastName=?, Email=?, PhoneNumber=?, Birthday=?, Password=? WHERE c_id=?";
+		try {
+			
+			PreparedStatement st = con.prepareStatement(sql);
+			
+			st.setString(1, cus1.getNIC());
+			st.setString(2, cus1.getFirstname());
+			st.setString(3, cus1.getLastname());
+			st.setString(4, cus1.getEmail());
+			st.setInt(5, cus1.getPhoneNumber());
+			st.setString(6, cus1.getBirthday());
+			st.setString(7, cus1.getPassword());
+			st.setInt(8, cus1.getCustomerId());
+			
+			st.executeUpdate();
+			
+		}catch(Exception e){
+			
+			System.out.println("catch 3 "+e);
+			
+		}
+		
+	}
 
 }
                         
