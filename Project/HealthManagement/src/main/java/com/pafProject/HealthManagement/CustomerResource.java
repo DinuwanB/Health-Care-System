@@ -39,7 +39,7 @@ public class CustomerResource {
 	
 	@POST
 	@Path("Customer")
-	@Consumes(MediaType.APPLICATION_XML)
+	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
 	public Customer createUser(Customer cus1)
 	{
 		System.out.println("Employeess Create API Called");
