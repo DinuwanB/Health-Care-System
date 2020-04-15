@@ -4,32 +4,59 @@ package com.pafProject.HealthManagement;
 
 import java.util.List;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;;
 
-@Path("customer")
+@Path("Customer")
 public class CustomerResource {
 	
-
+	CustomerDataModel cusRepo =  new CustomerDataModel();
 	
 	@GET
-	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
-	
-	public List<Customer> getCustomers()
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public List<Customer> GetCustomers()
 	{
 		System.out.println("Employee Get API Called");
-		return getCustomers();
+		return cusRepo.getCustomers();
 		
 	}
 	
 	@GET
-	@Path("customer/{id}")
-	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Path("Customer/{NIC}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Customer GetCustomer(@PathParam("NIC") String NIC) 
+	{
+		System.out.println("Employeess 1 Get API Called");
+		return cusRepo.getCustomer(NIC);
+	}
 	
-	public Customer getCustomer() {
+	@POST
+	@Path("Customer")
+	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public Customer CreateUser(Customer cus1)
+	{
+		System.out.println("Employeess Create API Called");
+		cusRepo.createUser(cus1); 
 		
+		return cus1;
+	}
+	
+	@PUT
+	@Path("Customer")
+	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public Customer Update(Customer cus1)
+	{
+		System.out.println("Employeess Create API Called");
+		cusRepo.updateUser(cus1); 
+		
+		return cus1;
 	}
 	
 
