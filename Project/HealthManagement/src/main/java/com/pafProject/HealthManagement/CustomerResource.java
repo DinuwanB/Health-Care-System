@@ -21,7 +21,7 @@ public class CustomerResource {
 	
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public List<Customer> getCustomers()
+	public List<Customer> GetCustomers()
 	{
 		System.out.println("Employee Get API Called");
 		return cusRepo.getCustomers();
@@ -31,7 +31,7 @@ public class CustomerResource {
 	@GET
 	@Path("Customer/{NIC}")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Customer getCustomer(@PathParam("NIC") String NIC) 
+	public Customer GetCustomer(@PathParam("NIC") String NIC) 
 	{
 		System.out.println("Employeess 1 Get API Called");
 		return cusRepo.getCustomer(NIC);
@@ -40,10 +40,21 @@ public class CustomerResource {
 	@POST
 	@Path("Customer")
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-	public Customer createUser(Customer cus1)
+	public Customer CreateUser(Customer cus1)
 	{
 		System.out.println("Employeess Create API Called");
 		cusRepo.createUser(cus1); 
+		
+		return cus1;
+	}
+	
+	@PUT
+	@Path("Customer")
+	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public Customer Update(Customer cus1)
+	{
+		System.out.println("Employeess Create API Called");
+		cusRepo.updateUser(cus1); 
 		
 		return cus1;
 	}
