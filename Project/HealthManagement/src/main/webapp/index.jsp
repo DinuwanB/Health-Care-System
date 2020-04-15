@@ -1,3 +1,4 @@
+<%@page import="com.pafProject.HealthManagement.CustomerResource"%>
 <html>
 
 <body>

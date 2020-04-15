@@ -84,38 +84,30 @@ public class CustomerDataModel {
 		return cu1;
 	}
 
-	
-	public String createUser(String nic, String firstname, String lastname, String email, String phonenumber,
-			String birthday, String password) {
-
-		String output = "";
-		
-		String sql = "INSERT INTO customers (`c_id`,`c_nic`,`FirstName`,`LastName`,`Email`,`PhoneNumber`,`Birthday`,`Password`)" + 
-		"values (?,?,?,?,?,?,?,?)";
-		
+	public void createUser(Customer cus1) {
+		String sql = "INSERT INTO customers VALUES (?,?,?,?,?,?,?,?)";
 		try {
 			
-			PreparedStatement st =  con.prepareStatement(sql);
-			st.setInt(1, 00);
-			st.setString(2, nic);
-			st.setString(3, firstname);
-			st.setString(4, lastname);
-			st.setString(5, email);
-			st.setString(6, phonenumber);
-			st.setString(7, birthday);
-			st.setString(8, password);
+			PreparedStatement st = con.prepareStatement(sql);
 			
+			st.setInt(1, cus1.getCustomerId());
+			st.setString(2, cus1.getNIC());
+			st.setString(3, cus1.getFirstname());
+			st.setString(4, cus1.getLastname());
+			st.setString(5, cus1.getEmail());
+			st.setInt(6, cus1.getPhoneNumber());
+			st.setString(7, cus1.getBirthday());
+			st.setString(8, cus1.getPassword());
 			
 			st.execute();
-			System.out.println("Data inserted--");
 			
-		} catch (Exception e) {
+		}catch(Exception e){
+			
 			System.out.println("catch 3 "+e);
+			
 		}
 		
-		return output;
 	}
-
 
 }
                         

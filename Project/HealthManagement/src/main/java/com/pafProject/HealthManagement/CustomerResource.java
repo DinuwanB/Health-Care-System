@@ -20,7 +20,7 @@ public class CustomerResource {
 	CustomerDataModel cusRepo =  new CustomerDataModel();
 	
 	@GET
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public List<Customer> getCustomers()
 	{
 		System.out.println("Employee Get API Called");
@@ -30,7 +30,7 @@ public class CustomerResource {
 	
 	@GET
 	@Path("Customer/{NIC}")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Customer getCustomer(@PathParam("NIC") String NIC) 
 	{
 		System.out.println("Employeess 1 Get API Called");
@@ -39,15 +39,13 @@ public class CustomerResource {
 	
 	@POST
 	@Path("Customer")
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public String createUser(@FormParam("nic") String nic, @FormParam("firstname") String firstname, @FormParam("lastname") String lastname,
-			@FormParam("email") String email, @FormParam("phonenumber") String phonenumber,@FormParam("Birthday") String birthday,
-			@FormParam("password") String password )
+	@Consumes(MediaType.APPLICATION_XML)
+	public Customer createUser(Customer cus1)
 	{
 		System.out.println("Employeess Create API Called");
-		String output = cusRepo.createUser(nic,firstname,lastname,email,phonenumber,birthday,password);
-		return output; 
+		cusRepo.createUser(cus1); 
 		
+		return cus1;
 	}
 	
 
