@@ -4,15 +4,15 @@ import java.io.IOException;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.ArrayList;
+import java.util.Base64;
 
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.ext.Provider;
 
-import org.glassfish.jersey.internal.util.Base64;
-
-
-
+//import org.glassfish.jersey.internal.util.Base64;
+@Provider
 public class BasicAuth implements ContainerRequestFilter {
 	
 	private static final String AUTHORIZATION_HEADER_KEY = "Authorization";
@@ -27,7 +27,8 @@ public class BasicAuth implements ContainerRequestFilter {
 		if(authHeader != null && authHeader.size() > 0) {
 			String authToken = authHeader.get(0);
 			authToken = authToken.replaceFirst(AUTHORIZATION_HEADER_PERFIX, "");
-			String decodeString = Base64.decodeAsString(authToken);
+			Base64.Decoder decoder = Base64.getDecoder();  
+			String decodeString = new String(decoder.decode(authToken)) ;
 			StringTokenizer tokenizer = new StringTokenizer(decodeString, ":");
 			String username = tokenizer.nextToken();
 			String password = tokenizer.nextToken();
