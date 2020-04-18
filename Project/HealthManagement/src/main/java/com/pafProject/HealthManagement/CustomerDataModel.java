@@ -25,7 +25,7 @@ public class CustomerDataModel {
 	public List<Customer> getCustomers() {
 		List<Customer> cust = new ArrayList<Customer>();
 
-		String sql = "SELECT * FROM customers";
+		String sql = "SELECT * FROM patient";
 
 		try {
 
@@ -41,7 +41,8 @@ public class CustomerDataModel {
 				cu1.setEmail(rs.getString(5));
 				cu1.setPhoneNumber(rs.getInt(6));
 				cu1.setBirthday(rs.getString(7));
-				cu1.setPassword(rs.getString(8));
+				cu1.setAddress(rs.getString(8));
+				cu1.setPassword(rs.getString(9));
 
 				cust.add(cu1);
 
@@ -54,7 +55,7 @@ public class CustomerDataModel {
 
 	public Customer getCustomer(int id) {
 
-		String sqlq = "SELECT * FROM customers WHERE c_id=" + id;
+		String sqlq = "SELECT * FROM patient WHERE pat_id=" + id;
 		Customer cu1 = new Customer();
 		try {
 			Statement st = con.createStatement();
@@ -69,7 +70,8 @@ public class CustomerDataModel {
 				cu1.setEmail(rs.getString(5));
 				cu1.setPhoneNumber(rs.getInt(6));
 				cu1.setBirthday(rs.getString(7));
-				cu1.setPassword(rs.getString(8));
+				cu1.setAddress(rs.getString(8));
+				cu1.setPassword(rs.getString(9));
 
 			}
 		} catch (Exception e) {
@@ -80,7 +82,7 @@ public class CustomerDataModel {
 	}
 
 	public void createUser(Customer cus1) {
-		String sql = "INSERT INTO customers VALUES (?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO patient VALUES (?,?,?,?,?,?,?,?,?)";
 		try {
 
 			PreparedStatement st = con.prepareStatement(sql);
@@ -92,7 +94,8 @@ public class CustomerDataModel {
 			st.setString(5, cus1.getEmail());
 			st.setInt(6, cus1.getPhoneNumber());
 			st.setString(7, cus1.getBirthday());
-			st.setString(8, cus1.getPassword());
+			st.setString(8, cus1.getAddress());
+			st.setString(9, cus1.getPassword());
 
 			st.execute();
 
@@ -105,7 +108,7 @@ public class CustomerDataModel {
 	}
 
 	public void updateUser(Customer cus1) {
-		String sql = "UPDATE customers set c_nic=? , FirstName=?, LastName=?, Email=?, PhoneNumber=?, Birthday=?, Password=? WHERE c_id=?";
+		String sql = "UPDATE patient set pat_nic=? , FirstName=?, LastName=?, Email=?, PhoneNumber=?, Birthday=?,Address=? Password=? WHERE pat_id=?";
 		try {
 
 			PreparedStatement st = con.prepareStatement(sql);
@@ -130,7 +133,7 @@ public class CustomerDataModel {
 	}
 
 	public void delete(int id) {
-		String sql = "DELETE FROM customers WHERE c_id=?";
+		String sql = "DELETE FROM patient WHERE pat_id=?";
 		try {
 
 			PreparedStatement st = con.prepareStatement(sql);

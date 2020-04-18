@@ -13,6 +13,15 @@ public class Customer {
 	private String NIC;
 	private String birthday;
 	private String password;
+	private String address;
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 	public int getCustomerId() {
 		return customerId;
