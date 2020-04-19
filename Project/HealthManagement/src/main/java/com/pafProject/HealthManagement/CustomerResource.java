@@ -40,10 +40,9 @@ public class CustomerResource {
 	public Customer CreateUser(Customer cus1) {
 		System.out.println("Patient Create API Called");
 		cusRepo.createUser(cus1);
-
 		return cus1;
 	}
-
+	
 	@PUT
 	@Path("Customer")
 	@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })

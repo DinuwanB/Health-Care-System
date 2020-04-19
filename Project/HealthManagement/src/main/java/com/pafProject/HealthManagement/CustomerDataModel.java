@@ -107,7 +107,7 @@ public class CustomerDataModel {
 
 	}
 
-	public void updateUser(Customer cus1) {
+	public String updateUser(Customer cus1) {
 		String sql = "UPDATE patient set pat_nic=? , FirstName=?, LastName=?, Email=?, PhoneNumber=?, Birthday=?,Address=? Password=? WHERE pat_id=?";
 		try {
 
@@ -129,6 +129,8 @@ public class CustomerDataModel {
 			System.out.println("catch 3 " + e);
 
 		}
+		
+		return "";
 
 	}
 
@@ -148,5 +150,35 @@ public class CustomerDataModel {
 		}
 
 	}
+
+	/*public String insertPatient(String pat_id, String pat_nic, String firstName, String lastName, String email,
+			String phoneNumber, String birthday, String address, String password) {
+		
+		String output = ""; 
+		System.out.println(pat_nic+ "  " + email);
+		try{ 
+		
+		String query = " INSERT INTO patient (`pat_id`,`pat_nic`,`FirstName`,`LastName`,`Email`,`PhoneNumber`,`Birthday`,`Address`,`Password)"+ " values (?, ?, ?, ?, ?,?,?,?,?)"; 
+		PreparedStatement preparedStmt = con.prepareStatement(query); 
+		
+		preparedStmt.setString(1, pat_id); 
+		preparedStmt.setString(2, pat_nic); 
+		preparedStmt.setString(3, firstName); 
+		preparedStmt.setString(4, lastName); 
+		preparedStmt.setString(5, email);
+		preparedStmt.setString(6, phoneNumber); 
+		preparedStmt.setString(7, birthday); 
+		preparedStmt.setString(8, address); 
+		preparedStmt.setString(9, password);
+		
+		preparedStmt.execute();
+		
+		output = "Inserted successfully";
+		}catch (Exception e) {
+			output = "Error while inserting the item.";
+		}
+		
+		return output;
+	}*/
 
 }

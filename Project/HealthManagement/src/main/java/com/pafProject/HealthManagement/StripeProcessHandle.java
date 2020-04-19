@@ -14,7 +14,7 @@ public class StripeProcessHandle {
 
 	public String createUser(String cemail, String cname) {
 		
-		com.stripe.Stripe.apiKey  = "STRIPE_API_KEY";
+		com.stripe.Stripe.apiKey  = "API_KEY";
 		
 		try {
 			
@@ -35,7 +35,7 @@ public class StripeProcessHandle {
 	
 	public String addCardtoUser(String userId, String number, String exp_month, String exp_year, String cvc)  {
 		
-		com.stripe.Stripe.apiKey  = "STRIPE_API_KEY";
+		com.stripe.Stripe.apiKey  = "API_KEY";
 		try {
 		Customer customer1 = Customer.retrieve(userId);
 		System.out.println(customer1.getId());
@@ -70,15 +70,15 @@ public class StripeProcessHandle {
 	}
 
 	public String payCharge(String cusId, String amount) {
-		com.stripe.Stripe.apiKey  = "STRIPE_API_KEY";
+		com.stripe.Stripe.apiKey  = "API_KEY";
 		
 		try {
 		Customer customer1 = Customer.retrieve(cusId);
-		System.out.println(customer1.getId());
-		System.out.println(amount);
+		System.out.println(customer1.getId()); 
+		
 		Map<String, Object> pay = new HashMap<>();
 		pay.put("amount", amount);
-		pay.put("currency", "lkr");
+		pay.put("currency", "usd");
 		pay.put("customer", customer1.getId());
 		
 		Charge.create(pay);
