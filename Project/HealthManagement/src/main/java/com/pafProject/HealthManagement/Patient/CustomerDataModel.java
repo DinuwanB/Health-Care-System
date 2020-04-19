@@ -1,4 +1,4 @@
-package com.pafProject.HealthManagement;
+package com.pafProject.HealthManagement.Patient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,8 +107,8 @@ public class CustomerDataModel {
 
 	}
 
-	public String updateUser(Customer cus1) {
-		String sql = "UPDATE patient set pat_nic=? , FirstName=?, LastName=?, Email=?, PhoneNumber=?, Birthday=?,Address=? Password=? WHERE pat_id=?";
+	public void updateUser(Customer cus1) {
+		String sql = "UPDATE patient set pat_nic=? , FirstName=?, LastName=?, Email=?, PhoneNumber=?, Birthday=?,Address=?, Password=? WHERE pat_id=?";
 		try {
 
 			PreparedStatement st = con.prepareStatement(sql);
@@ -119,8 +119,9 @@ public class CustomerDataModel {
 			st.setString(4, cus1.getEmail());
 			st.setInt(5, cus1.getPhoneNumber());
 			st.setString(6, cus1.getBirthday());
-			st.setString(7, cus1.getPassword());
-			st.setInt(8, cus1.getCustomerId());
+			st.setString(7, cus1.getAddress());
+			st.setString(8, cus1.getPassword());
+			st.setInt(9, cus1.getCustomerId());
 
 			st.executeUpdate();
 
@@ -130,7 +131,7 @@ public class CustomerDataModel {
 
 		}
 		
-		return "";
+	
 
 	}
 
@@ -151,34 +152,5 @@ public class CustomerDataModel {
 
 	}
 
-	/*public String insertPatient(String pat_id, String pat_nic, String firstName, String lastName, String email,
-			String phoneNumber, String birthday, String address, String password) {
-		
-		String output = ""; 
-		System.out.println(pat_nic+ "  " + email);
-		try{ 
-		
-		String query = " INSERT INTO patient (`pat_id`,`pat_nic`,`FirstName`,`LastName`,`Email`,`PhoneNumber`,`Birthday`,`Address`,`Password)"+ " values (?, ?, ?, ?, ?,?,?,?,?)"; 
-		PreparedStatement preparedStmt = con.prepareStatement(query); 
-		
-		preparedStmt.setString(1, pat_id); 
-		preparedStmt.setString(2, pat_nic); 
-		preparedStmt.setString(3, firstName); 
-		preparedStmt.setString(4, lastName); 
-		preparedStmt.setString(5, email);
-		preparedStmt.setString(6, phoneNumber); 
-		preparedStmt.setString(7, birthday); 
-		preparedStmt.setString(8, address); 
-		preparedStmt.setString(9, password);
-		
-		preparedStmt.execute();
-		
-		output = "Inserted successfully";
-		}catch (Exception e) {
-			output = "Error while inserting the item.";
-		}
-		
-		return output;
-	}*/
 
 }

@@ -1,4 +1,4 @@
-package com.pafProject.HealthManagement;
+package com.pafProject.HealthManagement.Payment;
 
 import java.util.HashMap;
 import java.util.Map;

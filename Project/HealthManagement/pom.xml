@@ -66,6 +66,12 @@
 			<artifactId>stripe-java</artifactId>
 			<version>19.0.0</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
+		<dependency>
+			<groupId>org.jacoco</groupId>
+			<artifactId>jacoco-maven-plugin</artifactId>
+			<version>0.8.1</version>
+		</dependency>
 
 	</dependencies>
 	<properties>

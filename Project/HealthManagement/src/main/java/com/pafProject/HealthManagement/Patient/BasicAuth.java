@@ -1,23 +1,28 @@
-package com.pafProject.HealthManagement;
+package com.pafProject.HealthManagement.Patient;
 
 import java.io.IOException;
-import java.util.Base64;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.ArrayList;
+import java.util.Base64;
 
 import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
 @Provider
-public class PaymentAuth {
+public class BasicAuth implements ContainerRequestFilter {
+	
 	private static final String AUTHORIZATION_HEADER_KEY = "Authorization";
 	private static final String AUTHORIZATION_HEADER_PERFIX = "Basic ";
-	private static final String SECURED_URL_PERFIXX = "payment";
+	private static final String SECURED_URL_PERFIX = "Customer";
 	
+	
+	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException {
 		
-		if(requestContext.getUriInfo().getPath().contains(SECURED_URL_PERFIXX)) {
+		if(requestContext.getUriInfo().getPath().contains(SECURED_URL_PERFIX)) {
 			
 		List<String> authHeader = requestContext.getHeaders().get(AUTHORIZATION_HEADER_KEY);
 		if(authHeader != null && authHeader.size() > 0) {
@@ -41,7 +46,7 @@ public class PaymentAuth {
 		
 		requestContext.abortWith(unauthorizedStatus);
 		
-		}
+	}
 
 	}
 }
