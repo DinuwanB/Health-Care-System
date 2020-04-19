@@ -6,8 +6,8 @@
 
 
 ## Group Members
-> Fernando H K D B - IT17036580
-> Devindi D G L - IT16112292
-> Dilshan W A D T
-> Premajayantha H V R N B
-> K D M Shantha
+- Fernando H K D B - IT17036580
+- Devindi D G L - IT16112292
+- Dilshan W A D T
+- Premajayantha H V R N B
+- K D M Shantha
