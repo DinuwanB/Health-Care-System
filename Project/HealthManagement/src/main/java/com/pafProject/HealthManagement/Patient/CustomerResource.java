@@ -1,4 +1,4 @@
-package com.pafProject.HealthManagement;
+package com.pafProject.HealthManagement.Patient;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class CustomerResource {
 	}
 
 	@GET
-	@Path("Customer/{id}")
+	@Path("/{id}")
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	public Customer GetCustomer(@PathParam("id") int id) {
 		System.out.println("Patient 1 Get API Called");
@@ -35,7 +35,7 @@ public class CustomerResource {
 	}
 
 	@POST
-	@Path("Customer")
+	@Path("register")
 	@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	public Customer CreateUser(Customer cus1) {
 		System.out.println("Patient Create API Called");
@@ -44,7 +44,7 @@ public class CustomerResource {
 	}
 	
 	@PUT
-	@Path("Customer")
+	@Path("update")
 	@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	public Customer Update(Customer cus1) {
 		System.out.println("Patient Update API Called");

@@ -1,4 +1,4 @@
-package com.pafProject.HealthManagement;
+package com.pafProject.HealthManagement.Patient;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
