@@ -1,0 +1,44 @@
+------------------------------------------------------------------------------------------------
+Bill Pay using given card
+-------------------------------------------------------------------------------------------------
+Resource: Payment
+
+Request: POST <Site URL>/payment/paycharge/ 
+
+Media: Form Data 
+
+Data: userId, amount
+
+Response: String Status Message 
+
+“Payment Successfully”/” Error<message>” 
+
+---------------------------------------------------------------------------------------------
+Create user in Stripe Account
+---------------------------------------------------------------------------------------------
+Resource: Payment
+
+Request: POST <Site URL>/payment/ccustomer/ 
+
+Media: Session Data 
+
+Data: email, name
+
+Response: String Status Message 
+
+“User Registered Successfully”/” Error<message>” 
+
+---------------------------------------------------------------------------------------------
+Add Card to Stripe Account
+-----------------------------------------------------------------------------------------------
+Resource: Payment
+
+Request: POST <Site URL>/payment/addcard/ 
+
+Media: Form Data 
+
+Data: userId, card_number, exp_month,exp_year,cvc
+
+Response: String Status Message 
+
+“card added succesfully Successfully”/” Error<message>” 
