@@ -1,0 +1,139 @@
+Create Database healthcaredb;
+
+Create table `healthcaredb`.`doctorDetails`(
+ `DOC_id` int (6) not null auto_increment, 
+ `firstname` varchar (40),
+ `lastname` varchar (40),
+ `age` int (3),
+ `gender` varchar (10),
+ `email` varchar (30),
+ `phonenumber` varchar (10),
+ `address` varchar (50),
+ `specialization` varchar (35),
+ `password` varchar (10),
+
+Primary  Key(DOC_id));
+
+insert into `healthcaredb`.`doctorDetails` values(20,'Priyantha','Rajakaruna',40,'Male','rajakaruna@gmail.com','0719945123','No.25/1/10,2nd St.,Battaramulla','Psycologist','raj123');
+insert into `healthcaredb`.`doctorDetails` values(21,'Amara','Sahabandu',52,'Female','amara123@yahoo.com','0776578123','No.22/1,Gamunu Rd,Kaduwela','Eye Surgeon', 'amr185');
+insert into `healthcaredb`.`doctorDetails` values(22,'Mayura','Perera',32,'Male','mayura@gmail.com','0717778901','No.52/1,Horton Rd,Colombo 7','Psycologist','may222');
+insert into `healthcaredb`.`doctorDetails` values(23,'Seetha','Kalutota',35,'Female','seetha35@gmail.com','0718987650','No.23,House Scheem,Havelock Town','Cardio','see190');
+insert into `healthcaredb`.`doctorDetails` values(24,'Samadhie','Madanayaka',45,'Female','samadhiemad@gmail.com','0773509087','No.500/1/10,Kulasewana Rd,Kottawa','Cardio', 'sam567');
+insert into `healthcaredb`.`doctorDetails` values(25,'Anuja','Kumarasighe',45,'Male','anuja@gmail.com','0712343490','No.100,Kota St.,Colombo 8','Eye Surgeon','anj345');
+
+select * from `healthcaredb`.`doctorDetails`;
+
+drop table `healthcaredb`.`doctorDetails`;
+
+Create table `healthcaredb`.`hospitalDetails`(
+  `hospital_id` int not null auto_increment,
+  `hospital_name` varchar (20) default null,
+   
+   primary key (hospital_id));
+   
+insert into `healthcaredb`.`hospitalDetails` values(1,'Navaloka Hospital');
+insert into `healthcaredb`.`hospitalDetails` values(2,'Lanka Hospital');
+insert into `healthcaredb`.`hospitalDetails` values(3,'Asiri Hospital');
+
+select * from `healthcaredb`.`hospitalDetails`;
+
+drop table `healthcaredb`.`hospital`;
+
+CREATE TABLE `healthcaredb`.`patient` (
+	`pat_id` INT (8) NOT NULL AUTO_INCREMENT,  
+    `pat_nic` VARCHAR (10) NOT NULL ,  
+    `FirstName` VARCHAR (20) NOT NULL ,  
+    `LastName` VARCHAR (20) NOT NULL ,  
+    `Email` VARCHAR (20) NOT NULL ,  
+    `PhoneNumber` INT (10) NOT NULL ,  
+    `Address` VARCHAR (30) NOT NULL ,  
+    `Password` VARCHAR (20) NOT NULL ,    
+    
+    PRIMARY KEY (`pat_id`), UNIQUE (`pat_nic`));
+    
+insert into `healthcaredb`.`patient` values(1,'960345670V','Ravindu','Jayathunga','ravindu@gmail.com','2147483647','No.25/2,2nd St.,Koswatte','ravindu123');
+insert into `healthcaredb`.`patient` values(2,'855033650V','Geesha','Pelwatta','geesha@gmail.com','716578123','No.55/1,Araliya Rd,Pannipitiya','gee456');
+insert into `healthcaredb`.`patient` values(3,'696840845V','Ranjani','Diyagala','ranjani@yahoo.com','777778901','No.78/1,Haritha Uyana,Colombo','raa222');
+
+drop table `healthcaredb`.`patientDetails`; 
+
+select * from `healthcaredb`.`patient`;
+
+CREATE TABLE `healthcaredb`.`appointmentdetails` (
+ `appid` INT (10) not null auto_increment,
+ `Date` varchar (20),
+ `Time` varchar (20),
+ `pat_id` int (8),
+ `hospital_id` int,
+ `DOC_id` int (10),
+ 
+  primary key (`appid`),
+  index `fk_appointmentDetails_idx` (`pat_id`,`hospital_id`,`DOC_id` ASC),
+  CONSTRAINT `pat_id` 
+  FOREIGN KEY (`pat_id`)
+  REFERENCES `healthcaredb`.`patient` (`pat_id`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+  CONSTRAINT `hospital_id` 
+  FOREIGN KEY (`hospital_id`)
+  REFERENCES `healthcaredb`.`hospitalDetails` (`hospital_id`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+  CONSTRAINT `DOC_id` 
+  FOREIGN KEY (`DOC_id`)
+  REFERENCES `healthcaredb`.`doctorDetails` (`DOC_id`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE);
+  
+select * from `healthcaredb`.`appointmentDetails`;
+  
+select appid, Date, Time, `healthcaredb`.`appointmentDetails`.pat_id, `healthcaredb`.`patient`.firstname, `healthcaredb`.`patient`.lastname, `healthcaredb`.`appointmentDetails`.hospital_id, `healthcaredb`.`hospitalDetails`.hospital_name, `healthcaredb`.`appointmentDetails`.DOC_id, `healthcaredb`.`doctorDetails`.firstname, `healthcaredb`.`doctorDetails`.lastname from (`healthcaredb`.`appointmentDetails` left join `healthcaredb`.`doctorDetails` on `healthcaredb`.`appointmentDetails`.DOC_id=`healthcaredb`.`doctorDetails`.DOC_id) left join `healthcaredb`.`patient` on `healthcaredb`.`appointmentDetails`.pat_id=`healthcaredb`.`patient`.pat_id left join `healthcaredb`.`hospitalDetails` on `healthcaredb`.`appointmentDetails`.hospital_id=`healthcaredb`.`hospitalDetails`.hospital_id;
+  
+insert into `healthcaredb`.`appointmentDetails` values(30,'21-DEC-2019','9pm',2,1,20);
+insert into `healthcaredb`.`appointmentDetails` values(31,'18-JAN-2020','7pm',3,2,20);
+insert into `healthcaredb`.`appointmentDetails` values(32,'5-FEB-2020','5pm',1,1,23);
+
+drop table `healthcaredb`.`appointmentDetails`;
+  
+Create table `healthcaredb`.`reportDetails`(
+ `REP_id` int (6) not null auto_increment,
+ `hospital_id` int,
+ `appid` int (10), 
+ `pat_id` int (8),
+ `DOC_id` int (6),
+ `Date` varchar (20),
+ `Time` varchar (10),
+ `Description` varchar (300),
+ 
+ Primary Key(REP_id),
+ index `fk_reportDetails_idx` (`hospital_id`,`appid`,`pat_id`,`DOC_id` ASC),
+  CONSTRAINT `hospital_id_fk` 
+  FOREIGN KEY (`hospital_id`)
+  REFERENCES `healthcaredb`.`hospitalDetails` (`hospital_id`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+  CONSTRAINT `appid` 
+  FOREIGN KEY (`appid`)
+  REFERENCES `healthcaredb`.`appointmentDetails` (`appid`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+  CONSTRAINT `pat_id_fk` 
+  FOREIGN KEY (`pat_id`)
+  REFERENCES `healthcaredb`.`patient` (`pat_id`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+  CONSTRAINT `DOC_id_fk` 
+  FOREIGN KEY (`DOC_id`)
+  REFERENCES `healthcaredb`.`doctorDetails` (`DOC_id`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE);
+ 
+ drop table `healthcaredb`.`reportDetails`;
+ 
+insert into `healthcaredb`.`reportDetails` values(50,1,30,1,20,'22-DEC-2019','9pm',' You are suffering mental disease. So get these medicines with right doss........');
+insert into `healthcaredb`.`reportDetails` values(51,2,31,2,20,'19-JAN-2020','7pm','mental disease.......');
+insert into `healthcaredb`.`reportDetails` values(52,1,32,3,23,'6-FEB-2020','5pm','heart problem.........');
+
+select * from `healthcaredb`.`reportDetails`;
+
+select REP_id, `healthcaredb`.`reportDetails`.hospital_id, `healthcaredb`.`hospitalDetails`.hospital_name, `healthcaredb`.`reportDetails`.appid, `healthcaredb`.`reportDetails`.pat_id, `healthcaredb`.`patient`.firstname, `healthcaredb`.`patient`.lastname, `healthcaredb`.`reportDetails`.DOC_id, `healthcaredb`.`doctorDetails`.firstname, `healthcaredb`.`doctorDetails`.lastname,Date,Time,Description from (`healthcaredb`.`reportDetails` left join `healthcaredb`.`doctorDetails` on `healthcaredb`.`reportDetails`.DOC_id=`healthcaredb`.`doctorDetails`.DOC_id) left join `healthcaredb`.`patient` on `healthcaredb`.`reportDetails`.pat_id=`healthcaredb`.`patient`.pat_id left join `healthcaredb`.`hospitalDetails` on `healthcaredb`.`reportDetails`.hospital_id=`healthcaredb`.`hospitalDetails`.hospital_id;
